@@ -1,3 +1,8 @@
+
+const detailSection =document.getElementById("detail-section");
+const section = document.getElementById('comments-section');
+
+
 const loadComments = () => {
     const url = `https://jsonplaceholder.typicode.com/comments`;
     fetch(url)
@@ -5,11 +10,15 @@ const loadComments = () => {
     .then(data => displayComments(data))
 }
 
-    const section = document.getElementById('comments-section');
+    // section.textContent = '';
+
 const displayComments = (comments) => {
+        section.style.display = 'block';
+        detailSection.textContent = '';
+
         for(const comment of comments) {
             // console.log(comment);
-            
+           
             const div = document.createElement('div');
             div.classList.add('comments');
             div.innerHTML = `
@@ -19,8 +28,11 @@ const displayComments = (comments) => {
             </div>
             `;
             section.appendChild(div);
+            
         }
+        // console.log(comment);
 }
+
 
 // details section
 const commentDetails = commentId => {
@@ -32,11 +44,11 @@ const commentDetails = commentId => {
 
 }
 
-        const detailSection =document.getElementById("detail-section");
-        
+       /*  const detailSection =document.getElementById("detail-section"); */
+        detailSection.textContent = '';
 
 const displayCommentDetails = details => {
-    console.log(details)
+    // console.log(details)
     const detailsDiv = document.createElement('div');
     detailsDiv.innerHTML = `
     <h1>${details.id}</h1>
@@ -44,4 +56,5 @@ const displayCommentDetails = details => {
     <h5>${details.email}</h1>
     `;
     detailSection.appendChild(detailsDiv);
+    section.style.display = 'none';
 }
